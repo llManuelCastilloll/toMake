@@ -1,0 +1,21 @@
+@import './Media.scss';
+@import './Vars.scss';
+
+* {
+    margin:0;
+    padding:0;
+    box-sizing:border-box;  
+    }
+
+body{
+    margin: 0;
+    font-family: $theme-font;
+}
+
+.containerr{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:"header header"
+                        "works_section form"
+                        "works_section graphic";
+}

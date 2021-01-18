@@ -1,0 +1,141 @@
+.works_section{
+    grid-area: works_section;
+    display: flex;
+    flex-direction: column;
+}
+
+.works_header{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    height: 70px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.titles{
+    font-weight: 700;
+    margin-right: 15px;
+}
+
+.filters{
+    display: flex;
+}
+
+.work_options{
+    cursor:pointer;
+}
+
+.work_icon{
+    margin-right: 5px;
+}
+
+.filter{
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+    background: #60bbfb;
+    border-radius: 30px;
+    font-size: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    cursor: pointer;
+}
+
+.filter_a{
+    background: #784CA4;
+}
+
+.filter_b{
+    background: #ABCA31;
+}
+
+.filter_c{
+    background: #B48585;
+}
+
+.container_works{
+    display: flex;
+    flex-direction: column;
+}
+
+.work_header{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.work_opc{
+    display: flex;
+
+}
+
+.eliminar{
+    background: #B48585;
+    padding: 4px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.actualizar{
+    background: #ABCA31;
+    padding: 4px;
+    border-radius: 15px;
+    cursor:pointer;
+}
+
+.work{
+    background: #37A0EA;
+    color: #FFFFFF;
+    margin: 10px;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.no_works{
+    display: flex;
+    flex-direction: column;
+    background: #FEECF3;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    color: #000000;
+    align-items: center;
+    margin: 10px;
+    border-radius: 10px;
+    padding: 15px;
+    min-height: 289px;
+    text-align: center;
+}
+
+.work_footer{
+    display: flex;
+    align-content: space-around;
+    justify-content: space-between;
+}
+
+.detener{
+    background: #B48585;
+    padding: 5px;
+    padding-left: 7px;
+    padding-right: 9px;
+    border-radius: 15px;   
+}
+
+.pausar{
+    background: #C4C4C4;
+    padding: 5px;
+    padding-left: 7px;
+    padding-right: 9px;
+    border-radius: 15px;
+}
+
+.terminar{
+    background: #ABCA31;
+    padding: 5px;
+    padding-left: 7px;
+    padding-right: 9px;
+    border-radius: 15px;
+}
