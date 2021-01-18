@@ -27,7 +27,6 @@ const ModalEdit = props => {
   const toggle = () => setModal(!modal);
 
   const updateWork = () => {
-      console.log("here...");
         var works = JSON.parse(sessionStorage.getItem("Works"));
         let updateWork = {
           id: id,
@@ -36,11 +35,8 @@ const ModalEdit = props => {
           timeDefinition: "00:00:00",
         }
         let prevWorks = works.works.filter(item => item.id !== id);
-        console.log("prev", prevWorks);
             prevWorks.push(updateWork);
-          console.log("prevll",prevWorks)
-
-
+            
         works.works = prevWorks
         sessionStorage.setItem("Works", JSON.stringify(works));
         props.updateSome({name:"uno", value:"dos"});

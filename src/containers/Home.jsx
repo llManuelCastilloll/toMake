@@ -5,6 +5,7 @@ import { Forms } from '../components/Forms';
 import { Graphics } from '../components/Graphics';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import moment from 'moment';
 
 import '../assets/styles/App.scss'
 
@@ -36,6 +37,7 @@ class Home extends React.Component{
                     name: "Realizar tareas de front-end proyecto Netflix",
                     description: "Se van a llevar a cabo las tareas de definición de actividades",
                     timeDefinition: "3:00:30",
+                    timeClosure: moment(),
                     timeReleased: "00:00:00"
                 }
             ]

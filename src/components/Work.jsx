@@ -10,7 +10,6 @@ export const Work = props => {
     const { works } = props;
 
     const makeWorks = () => {
-        console.log(works.length)
         if(works.length > 0)
         {
             let workItems = works.map(item => {
@@ -37,10 +36,12 @@ export const Work = props => {
                         <p className="work_description">{item.description}</p>
                         <div className="work_footer">
                             <Timer   
+                                id = { item.id }
                                 timeDuration = {item.timeDefinition}
+                                timeClosure = {item.timeClosure}
                             />
                             <div className="work_options detener"><BiStopCircle className="work_icon"/>Detener</div>
-                            <div className="work_options pausar"><BiPauseCircle className="work_icon" /> Pausar</div>
+                            {/* <div className="work_options pausar"><BiPauseCircle className="work_icon" /> Pausar</div> */}
                             <div className="work_options terminar"><FcApproval className="work_icon"/>Finalizar</div>
                         </div>                    
                     </div>

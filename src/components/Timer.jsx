@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { FcAlarmClock } from "react-icons/fc";
+import moment from 'moment';
 
 export const Timer = props => {
-    const { timeDuration } = props
+    const { timeDuration, timeClosure } = props
     let tiniTimes = timeDuration.split(":");
     const [timeHours, setTimeHours] = useState(tiniTimes[0]);
     const [timeMinutes, setTimeMinutes] = useState(tiniTimes[1]);
@@ -11,14 +12,11 @@ export const Timer = props => {
     let interval = useRef();
 
     const playTime = () => {
-        let timenow = new Date()
-        console.log(timenow);
-        const timeDefinition = new Date('Sun Jan 17 2021 12:30:07').getTime();
-        console.log("time:", timeDefinition);
+        let toUse = moment(timeClosure).valueOf();
 
         interval = setInterval(() => {
             const now = new Date().getTime();
-            const distance = timeDefinition - now;
+            const distance = toUse - now;
 
             const hours = Math.floor(distance % (1000 * 60 * 60 * 24) / (1000 * 60 * 60));
             const minutes = Math.floor(distance % (1000 * 60 * 60 ) / (1000 * 60 ));

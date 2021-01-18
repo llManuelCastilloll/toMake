@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FcAlarmClock } from "react-icons/fc";
 import TimeInput from 'react-advanced-time-input';
 import '../assets/styles/components/Forms.scss';
+import moment from 'moment';
 
 export const Forms = ({updateSome}) => {
     const [form, setValues] = useState({
@@ -28,14 +29,24 @@ export const Forms = ({updateSome}) => {
 
     const _handleSubmit = event => {
         event.preventDefault();
+        //creación de fecha conclusión:
+        let hoy = moment();
+        hoy.add(moment.duration(form.timeDuration));
+        let durationArray = form.timeDuration.split(":");
+        console.log("array", durationArray, parseInt(durationArray[0]), (parseInt(durationArray[1])>=0))
+        //obtención de tareas:
         var works = JSON.parse(sessionStorage.getItem("Works"));
-        
+        //Creación de nueva tarea:
         let newWork = {
-            id: 2,
+            id: works.works.length == 0 ? 0 : works.works.length + 1, //Creación de id
             name: form.name,
             description: form.description,
             timeDefinition: form.timeDuration,
-            timeReleased: '00:00:00'
+            timeClosure: hoy,
+            durationType: (parseInt(durationArray[0])>=1)&&(parseInt(durationArray[1])>=0) ? "Larga" :
+                            (parseInt(durationArray[0])<1)&&(parseInt(durationArray[1])>=30) ? "Media" :
+                                (parseInt(durationArray[0])<1)&&(parseInt(durationArray[1])<30) ? "Corta" : "Indefinida",
+            workStatus: "En curso"
         };
         works.works.push(newWork)
         sessionStorage.setItem("Works", JSON.stringify(works));
