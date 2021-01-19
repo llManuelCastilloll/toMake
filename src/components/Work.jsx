@@ -14,13 +14,13 @@ export const Work = props => {
         {
             let workItems = works.map(item => {
                 return(
-                    <div className="work" key={item.name}>
+                    <div className="work" key={item.id}>
                         <div className="work_header">
                             <span className="work_title titles">{item.name}</span> 
                             <div className="work_opc">
                                 <div 
                                     className="eliminar work_icon" 
-                                    onClick={()=>props.handleWorks(item.name, "delete", "")}
+                                    onClick={()=>props.handleWorks(item.id)}
                                     >
                                         <BiTrash />
                                 </div>
@@ -28,21 +28,43 @@ export const Work = props => {
                                     id = { item.id }
                                     name = {item.name}
                                     description = {item.description}
-                                    updateSome = {props.updateSome}
+                                    getAllWorks = {props.getAllWorks}
                                 />
                             </div>
                         </div>
                         
                         <p className="work_description">{item.description}</p>
                         <div className="work_footer">
-                            <Timer   
-                                id = { item.id }
-                                timeDuration = {item.timeDefinition}
-                                timeClosure = {item.timeClosure}
-                            />
-                            <div className="work_options detener"><BiStopCircle className="work_icon"/>Detener</div>
-                            {/* <div className="work_options pausar"><BiPauseCircle className="work_icon" /> Pausar</div> */}
-                            <div className="work_options terminar"><FcApproval className="work_icon"/>Finalizar</div>
+                            {
+                                item.workStatus == "finalizado" ? 
+                                ( <div 
+                                    className="work_options terminar" 
+                                    >
+                                    <FcApproval className="work_icon"/>Finalizado
+                                </div>)
+                                :
+                                (
+                                    <>
+                                    <Timer   
+                                        id = { item.id }
+                                        name = {item.name}
+                                        description = {item.description}
+                                        timeDuration = {item.timeDefinition}
+                                        timeClosure = {item.timeClosure}
+                                        typeWork = {item.durationType}
+                                        updateWork = {props.updateWork}
+                                    />
+                                    <div className="work_options detener"><BiStopCircle className="work_icon"/>Detener</div>
+                                    {/* <div className="work_options pausar"><BiPauseCircle className="work_icon" /> Pausar</div> */}
+                                    <div 
+                                        className="work_options terminar" 
+                                        onClick={()=>props.finishWork(item.id, item.name, item.description, item.workStatus)}
+                                    >
+                                        <FcApproval className="work_icon"/>Finalizar
+                                    </div>
+                                    </>
+                                )
+                            }
                         </div>                    
                     </div>
                 )
@@ -54,7 +76,7 @@ export const Work = props => {
     return(
         <>
         {works.length === 0 ? 
-            (<div className="no_works">Nada que mostrar</div>)
+            (<div className="no_works">No hay tareas qué mostrar.</div>)
             :
             (makeWorks())
         }

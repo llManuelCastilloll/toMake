@@ -1,11 +1,11 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2'
 
-const data = {
-  labels: ['1', '2', '3', '4', '5', '6'],
+var data = {
+  labels: ['Finalizadas', 'Corta', 'Media', 'Larga'],
   datasets: [
     {
-      label: 'Tus actividades',
+      label: 'Tus actividades esta semana',
       data: [12, 19, 3, 5, 2, 3],
       fill: false,
       backgroundColor: 'rgb(255, 99, 132)',
@@ -26,7 +26,10 @@ const options = {
   },
 }
 
-export const Chart = () => {
+export const Chart = props => {
+    const { graphicData } = props;
+    data.datasets[0].data  = graphicData
+
     return(
         <div className="chart">
             <Line data={data} options={options} />

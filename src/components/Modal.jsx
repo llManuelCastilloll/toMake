@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Input } from 'reactstrap';
 import { BiEditAlt } from "react-icons/bi";
-import '../../node_modules/bootstrap/dist/css/bootstrap.min.css'
-
+import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
+import { getURI } from '../../config';
+import { toast } from 'react-toastify';
 
 const ModalEdit = props => {
   const {
@@ -27,20 +29,19 @@ const ModalEdit = props => {
   const toggle = () => setModal(!modal);
 
   const updateWork = () => {
-        var works = JSON.parse(sessionStorage.getItem("Works"));
-        let updateWork = {
-          id: id,
-          name: name,
-          description: description,
-          timeDefinition: "00:00:00",
-        }
-        let prevWorks = works.works.filter(item => item.id !== id);
-            prevWorks.push(updateWork);
-            
-        works.works = prevWorks
-        sessionStorage.setItem("Works", JSON.stringify(works));
-        props.updateSome({name:"uno", value:"dos"});
-        toggle()
+    axios
+    .put(`${getURI()}api/v1/works/updateWork`, {
+        id: id,
+        name: name,
+        description: description,
+        timeDefinition: "00:00:00",
+    })
+    .then(result => {
+        toast.success("¡Se ha actualizado la tarea!");
+        props.getAllWorks()
+    })
+    .catch(e=>console.log(e))
+    toggle()
   }
 
   return (

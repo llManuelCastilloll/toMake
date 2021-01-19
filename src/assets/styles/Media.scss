@@ -1,10 +1,8 @@
-@media only screen and (max-width:400px){
-    .container{
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-areas:"header header"
-                            "works_section works_section"
-                            "form form"
-                            "graphic graphic";
+@import './Vars.scss';
+@media screen and (max-width:500px){
+    .containerr{
+        display: $grid_display!important;
+        grid-template-columns: $grid_columns!important ;
+        grid-template-areas:$grid_areas!important;
     }
 }

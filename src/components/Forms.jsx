@@ -3,8 +3,11 @@ import { FcAlarmClock } from "react-icons/fc";
 import TimeInput from 'react-advanced-time-input';
 import '../assets/styles/components/Forms.scss';
 import moment from 'moment';
+import axios from 'axios';
+import { getURI } from '../../config';
+import { toast } from 'react-toastify';
 
-export const Forms = ({updateSome}) => {
+export const Forms = ({updateSome, getAllWorks}) => {
     const [form, setValues] = useState({
         name:'',
         description: '',
@@ -33,25 +36,35 @@ export const Forms = ({updateSome}) => {
         let hoy = moment();
         hoy.add(moment.duration(form.timeDuration));
         let durationArray = form.timeDuration.split(":");
-        console.log("array", durationArray, parseInt(durationArray[0]), (parseInt(durationArray[1])>=0))
-        //obtención de tareas:
-        var works = JSON.parse(sessionStorage.getItem("Works"));
+        console.log("timefinish", )
         //Creación de nueva tarea:
-        let newWork = {
-            id: works.works.length == 0 ? 0 : works.works.length + 1, //Creación de id
-            name: form.name,
-            description: form.description,
-            timeDefinition: form.timeDuration,
-            timeClosure: hoy,
-            durationType: (parseInt(durationArray[0])>=1)&&(parseInt(durationArray[1])>=0) ? "Larga" :
-                            (parseInt(durationArray[0])<1)&&(parseInt(durationArray[1])>=30) ? "Media" :
-                                (parseInt(durationArray[0])<1)&&(parseInt(durationArray[1])<30) ? "Corta" : "Indefinida",
-            workStatus: "En curso"
-        };
-        works.works.push(newWork)
-        sessionStorage.setItem("Works", JSON.stringify(works));
-        updateSome({name:"workAdded", value:true});
-        clearInputs();
+        if(form.name!=="" && form.description && form.timeDuration){
+            if((parseInt(durationArray[0])<=2)){
+                axios
+                .post(`${getURI()}api/v1/works/`, {
+                    name: form.name,
+                    description: form.description,
+                    timeDefinition: form.timeDuration,
+                    timeClosure: hoy,
+                    durationType: (parseInt(durationArray[0])>=1)&&(parseInt(durationArray[1])>=0) ? "Larga" :
+                                    (parseInt(durationArray[0])<1)&&(parseInt(durationArray[1])>=30) ? "Media" :
+                                        (parseInt(durationArray[0])<1)&&(parseInt(durationArray[1])<30) ? "Corta" : "Indefinida",
+                    workStatus: "En curso"
+                })
+                .then(result => {
+                    console.log("result",result);
+                    toast.success("¡Tienes una nueva tarea agregada!");
+                    getAllWorks();
+                    clearInputs();
+                })
+                .catch(e=>console.log(e))
+                
+            }else{
+                toast.error("La duración de la tarea debe ser menor a 2 horas.");
+            }            
+        }else{
+            toast.error("Todos los campos son obligatorios.");
+        }        
     }
 
     return(
@@ -76,7 +89,7 @@ export const Forms = ({updateSome}) => {
                 />
                 <div className="form_footer">
                     <div className="timing">
-                        <span className="work_duration">< FcAlarmClock/>Duración:</span>  
+                        <span className="work_duration work_icon">< FcAlarmClock className="work_icon"/>Duración:</span>  
                         <TimeInput
                             className="input_time"
                             name="timeDuration"

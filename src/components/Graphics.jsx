@@ -16,7 +16,9 @@ export class Graphics extends React.Component {
             <section className="graphic">
                 <span className="graph_title titles">Mi productividad.</span>
                 <div className="graph">
-                    <Chart />
+                    <Chart
+                        graphicData = {this.props.graphicData}
+                    />
                 </div>
             </section>
         );

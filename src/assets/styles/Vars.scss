@@ -3,3 +3,10 @@
 
 $theme-font: 'Roboto', sans-serif;
 $lobster-font: 'Lobster',  cursive, 'Roboto';
+
+$grid_display: grid;
+$grid_columns: repeat(2, 1fr);
+$grid_areas:"header header"
+            "form form"
+            "works_section works_section"
+            "graphic graphic";
