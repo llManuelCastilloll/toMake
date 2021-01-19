@@ -54,7 +54,7 @@ export const Work = props => {
                                         typeWork = {item.durationType}
                                         updateWork = {props.updateWork}
                                     />
-                                    <div className="work_options detener"><BiStopCircle className="work_icon"/>Detener</div>
+                                    {/* <div className="work_options detener"><BiStopCircle className="work_icon"/>Detener</div> */}
                                     {/* <div className="work_options pausar"><BiPauseCircle className="work_icon" /> Pausar</div> */}
                                     <div 
                                         className="work_options terminar" 
